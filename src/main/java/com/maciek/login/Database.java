@@ -1,6 +1,5 @@
 package com.maciek.login;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Database {
