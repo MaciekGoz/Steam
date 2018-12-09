@@ -2,8 +2,18 @@ package com.maciek.login;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SteamWindow extends JFrame {
+
+    private CardLayout cardLayout = new CardLayout();
+
+    private JPanel panel;
+    private JPanel buttonPanel;
+
+    JPanel panelRed = new JPanel();
+    JPanel panelBlue = new JPanel();
 
     private JButton showShopButton;
     private JButton showLibraryButton;
@@ -34,6 +44,36 @@ public class SteamWindow extends JFrame {
         setShowCommunityButton();
         setShowUserButton();
 
+        panel = new JPanel(new BorderLayout());
+        buttonPanel = new JPanel();
+
+
+
+
+        cardLayout.setHgap(20);
+        cardLayout.setVgap(20);
+
+        panel.setLayout(cardLayout);
+
+        panelRed.setBackground(Color.red);
+        panel.add(panelRed, "RED");
+
+
+        panelBlue.setBackground(Color.blue);
+        panel.add(panelBlue, "BLUE");
+
+        cardLayout.layoutContainer(panel);
+
+        buttonPanel.add(showShopButton);
+        buttonPanel.add(showLibraryButton);
+        buttonPanel.add(showCommunityButton);
+        buttonPanel.add(showUserButton);
+
+        add(buttonPanel, BorderLayout.NORTH);
+        add(panel, BorderLayout.CENTER);
+
+        cardLayout.show(panel, "RED");
+
         showWindow();
     }
 
@@ -62,7 +102,13 @@ public class SteamWindow extends JFrame {
         showShopButton.setFont(new Font("Arial",Font.BOLD,15));
         showShopButton.setBackground(new Color(68,140,213));
         showShopButton.setForeground(Color.white);
-        add(showShopButton);
+        showShopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panel, "RED");
+            }
+        });
+        //add(showShopButton);
     }
 
     private void setShowLibraryButton() {
@@ -72,7 +118,13 @@ public class SteamWindow extends JFrame {
         showLibraryButton.setFont(new Font("Arial",Font.BOLD,15));
         showLibraryButton.setBackground(new Color(68,140,213));
         showLibraryButton.setForeground(Color.white);
-        add(showLibraryButton);
+        showLibraryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panel, "BLUE");
+            }
+        });
+        //add(showLibraryButton);
     }
 
     private void setShowCommunityButton() {
@@ -82,7 +134,7 @@ public class SteamWindow extends JFrame {
         showCommunityButton.setFont(new Font("Arial",Font.BOLD,15));
         showCommunityButton.setBackground(new Color(68,140,213));
         showCommunityButton.setForeground(Color.white);
-        add(showCommunityButton);
+        //add(showCommunityButton);
     }
 
     private void setShowUserButton() {
@@ -92,7 +144,7 @@ public class SteamWindow extends JFrame {
         showUserButton.setFont(new Font("Arial",Font.BOLD,15));
         showUserButton.setBackground(new Color(68,140,213));
         showUserButton.setForeground(Color.white);
-        add(showUserButton);
+        //add(showUserButton);
     }
 
     private void setWindow() {
@@ -103,7 +155,6 @@ public class SteamWindow extends JFrame {
 
     private void showWindow() {
         setResizable(false);
-        setLayout(null);
         setLocationRelativeTo(null);
     }
 
