@@ -10,32 +10,45 @@ public class ChoiceWindow extends JFrame {
     private JLabel label;
 
     public ChoiceWindow() {
+        init();
+    }
+
+
+     private void init() {
         setWindow();
 
         getContentPane().setBackground(new Color(203,228,239));
 
-        loginButton = new JButton();
-        loginButton.setBounds(60,90,460,50);
-        loginButton.setText("Login");
-        loginButton.setBackground(new Color(68,140,213));
-        loginButton.setForeground(Color.white);
-
-        registerButton = new JButton();
-        registerButton.setBounds(60, 260, 460,50);
-        registerButton.setText("Register");
-        registerButton.setBackground(new Color(68,140,213));
-        registerButton.setForeground(Color.white);
-
-        label = new JLabel("or");
-        label.setBounds(285,180,50,40);
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-
-        add(loginButton);
-        add(registerButton);
-        add(label);
+        setLoginButton();
+        setRegisterButton();
+        setLabel();
 
         showWindow();
     }
+
+    private void setLoginButton() {
+        loginButton = new JButton();
+        loginButton.setBounds(60, 90, 460, 50);
+        loginButton.setText("Login");
+        loginButton.setBackground(new Color(68, 140, 213));
+        loginButton.setForeground(Color.white);
+        add(loginButton);
+    }
+    private void setRegisterButton() {
+        registerButton = new JButton();
+        registerButton.setBounds(60, 260, 460, 50);
+        registerButton.setText("Register");
+        registerButton.setBackground(new Color(68, 140, 213));
+        registerButton.setForeground(Color.white);
+        add(registerButton);
+    }
+    private void setLabel() {
+        label = new JLabel("or");
+        label.setBounds(285, 180, 50, 40);
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        add(label);
+    }
+
 
     private void showWindow() {
         setLocationRelativeTo(null);
