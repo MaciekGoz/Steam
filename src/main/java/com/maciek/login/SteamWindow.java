@@ -19,10 +19,6 @@ public class SteamWindow extends JFrame {
 
     private String username;
 
-
-
-
-
     public SteamWindow() {
         init();
     }

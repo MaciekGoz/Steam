@@ -2,18 +2,34 @@ package com.maciek.login;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class RegisterWindow extends JFrame {
-
-    private JLabel usernameLabel;
-    private JLabel passwordLabel;
+public class RegisterWindow extends JFrame implements KeyListener {
 
     private JTextArea usernameTextArea;
     private JTextArea passwordTextArea;
 
     private JButton registerButton;
 
+    private AbstractAction transferFocus;
+    private AbstractAction clickRegisterButton;
+
+
     public RegisterWindow() {
+        transferFocus = new AbstractAction () {
+            public void actionPerformed ( ActionEvent e ) {
+                ( ( Component ) e.getSource () ).transferFocus ();
+            }
+        };
+
+        clickRegisterButton = new AbstractAction () {
+            public void actionPerformed ( ActionEvent e ) {
+                registerButton.doClick();
+            }
+        };
+
         init();
     }
 
@@ -32,7 +48,7 @@ public class RegisterWindow extends JFrame {
     }
 
     private void setUsernameLabel() {
-        usernameLabel = new JLabel();
+        JLabel usernameLabel = new JLabel();
         usernameLabel.setBounds(30, 40, 100, 30);
         usernameLabel.setText("Username:");
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -40,7 +56,7 @@ public class RegisterWindow extends JFrame {
     }
 
     private void setPasswordLabel() {
-        passwordLabel = new JLabel();
+        JLabel passwordLabel = new JLabel();
         passwordLabel.setBounds(30, 120, 100, 30);
         passwordLabel.setText("Password:");
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -50,12 +66,20 @@ public class RegisterWindow extends JFrame {
         usernameTextArea = new JTextArea();
         usernameTextArea.setBounds(150, 43, 140, 24);
         usernameTextArea.setFont(new Font("Arial", Font.BOLD, 18));
+        usernameTextArea.getInputMap ().put ( KeyStroke.getKeyStroke ( "TAB" ), "transferFocus" );
+        usernameTextArea.getActionMap ().put ( "transferFocus", transferFocus );
+        usernameTextArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "clickLoginButton");
+        usernameTextArea.getActionMap().put("clickLoginButton", clickRegisterButton);
         add(usernameTextArea);
     }
     private void setPasswordTextArea() {
         passwordTextArea = new JTextArea();
         passwordTextArea.setBounds(150, 123, 140, 24);
         passwordTextArea.setFont(new Font("Arial", Font.BOLD, 18));
+        passwordTextArea.getInputMap ().put ( KeyStroke.getKeyStroke ( "TAB" ), "transferFocus" );
+        passwordTextArea.getActionMap ().put ( "transferFocus", transferFocus );
+        passwordTextArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "clickLoginButton");
+        passwordTextArea.getActionMap().put("clickLoginButton", clickRegisterButton);
         add(passwordTextArea);
     }
     private void setRegisterButton() {
@@ -88,6 +112,23 @@ public class RegisterWindow extends JFrame {
 
     public JButton getRegisterButton() {
         return registerButton;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+            registerButton.doClick();
+        }
     }
 }
 
