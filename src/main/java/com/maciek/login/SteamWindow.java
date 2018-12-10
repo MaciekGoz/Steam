@@ -14,6 +14,8 @@ public class SteamWindow extends JFrame {
 
     JPanel panelRed = new JPanel();
     JPanel panelBlue = new JPanel();
+    JPanel panelGreen = new JPanel();
+    JPanel panelPink = new JPanel();
 
     private JButton showShopButton;
     private JButton showLibraryButton;
@@ -32,6 +34,7 @@ public class SteamWindow extends JFrame {
     public SteamWindow() {
         init();
     }
+    
 
     private void init() {
         setWindow();
@@ -58,9 +61,16 @@ public class SteamWindow extends JFrame {
         panelRed.setBackground(Color.red);
         panel.add(panelRed, "RED");
 
-
         panelBlue.setBackground(Color.blue);
         panel.add(panelBlue, "BLUE");
+
+        panelGreen.setBackground(Color.green);
+        panel.add(panelGreen, "GREEN");
+
+        panelPink.setBackground(Color.pink);
+        panel.add(panelPink, "PINK");
+
+
 
         cardLayout.layoutContainer(panel);
 
@@ -68,11 +78,12 @@ public class SteamWindow extends JFrame {
         buttonPanel.add(showLibraryButton);
         buttonPanel.add(showCommunityButton);
         buttonPanel.add(showUserButton);
+        //panelRed.add(gameLabel)
 
         add(buttonPanel, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
 
-        cardLayout.show(panel, "RED");
+        //cardLayout.show(panel, "RED");
 
         showWindow();
     }
@@ -134,6 +145,12 @@ public class SteamWindow extends JFrame {
         showCommunityButton.setFont(new Font("Arial",Font.BOLD,15));
         showCommunityButton.setBackground(new Color(68,140,213));
         showCommunityButton.setForeground(Color.white);
+        showCommunityButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panel,"GREEN");
+            }
+        });
         //add(showCommunityButton);
     }
 
@@ -144,6 +161,12 @@ public class SteamWindow extends JFrame {
         showUserButton.setFont(new Font("Arial",Font.BOLD,15));
         showUserButton.setBackground(new Color(68,140,213));
         showUserButton.setForeground(Color.white);
+        showUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panel, "PINK");
+            }
+        });
         //add(showUserButton);
     }
 
